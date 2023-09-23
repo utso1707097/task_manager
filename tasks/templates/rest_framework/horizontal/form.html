@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create or Update Task</title>
+    <!-- Add your CSS styles here, if needed -->
+  </head>
+  <body>
+    <h1>Create or Update Task</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.non_field_errors }}
+      <div>
+        <label for="{{ form.title.id_for_label }}">Title:</label>
+        {{ form.title }} {{ form.title.errors }}
+      </div>
+      <div>
+        <label for="{{ form.description.id_for_label }}">Description:</label>
+        {{ form.description }} {{ form.description.errors }}
+      </div>
+      <div>
+        <label for="{{ form.due_date.id_for_label }}">Due Date:</label>
+        {{ form.due_date }} {{ form.due_date.errors }}
+      </div>
+      <!-- Add more form fields as needed -->
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

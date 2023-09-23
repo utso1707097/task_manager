@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TaskForm
 from django.core.exceptions import PermissionDenied
+from .serializers import TaskSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 def register(request):
     if request.method == 'POST':
@@ -74,3 +77,15 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
         if task.user != self.request.user:
             raise PermissionDenied("You do not have permission to delete this task.")
         return task
+
+# REST API VIEWS
+
+class TaskListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+class TaskRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
