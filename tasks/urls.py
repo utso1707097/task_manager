@@ -17,6 +17,8 @@ urlpatterns = [
     path('<int:pk>/delete/', views.TaskDeleteView.as_view(), name='task_delete'),
 
     #REST API views
+    path('api/register/', views.UserRegistrationAPIView.as_view(), name='api-register'),
+    path('api/login/', views.UserLoginAPIView.as_view(), name='api-login'),
     path('api/tasks/', views.TaskListCreateAPIView.as_view(), name='api-task-list'),
     path('api/tasks/<int:pk>/', views.TaskRetrieveUpdateDestroyAPIView.as_view(), name='api-task-detail'),
 ]
