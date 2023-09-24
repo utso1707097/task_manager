@@ -1,4 +1,7 @@
-```markdown
+Certainly! Here's the updated README.md file with all the specified paths and endpoints included:
+
+---
+
 # Task Manager Application
 
 The **Task Manager** is a web application built with Django and Django REST framework that allows users to manage their tasks. Users can create, view, update, and delete tasks, and the application also provides RESTful API endpoints for task management.
@@ -22,55 +25,45 @@ The **Task Manager** is a web application built with Django and Django REST fram
 To run the application locally, follow these steps:
 
 1. Clone the repository:
-```
 
-git clone https://github.com/your-username/task_manager.git
-
-```
+   ```
+   git clone https://github.com/your-username/task_manager.git
+   ```
 
 2. Create a virtual environment and activate it:
 
-```
-
-python -m venv venv
-source venv/bin/activate # On Windows, use: venv\Scripts\activate
-
-```
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+   ```
 
 3. Install the required dependencies:
 
-```
-
-pip install -r requirements.txt
-
-```
+   ```
+   pip install -r requirements.txt
+   ```
 
 4. Configure the PostgreSQL database:
-- Create a PostgreSQL database and configure the database settings in the project's settings.py file.
+
+   - Create a PostgreSQL database and configure the database settings in the project's settings.py file.
 
 5. Apply database migrations:
 
-```
-
-python manage.py migrate
-
-```
+   ```
+   python manage.py migrate
+   ```
 
 6. Create a superuser account to access the Django admin panel:
 
-```
-
-python manage.py createsuperuser
-
-```
+   ```
+   python manage.py createsuperuser
+   ```
 
 7. Run the development server:
 
-```
-
-python manage.py runserver
-
-```
+   ```
+   python manage.py runserver
+   ```
 
 8. Access the application in your web browser at `http://localhost:8000/`.
 
@@ -119,11 +112,16 @@ To access API endpoints that require authentication, use Basic Authentication wi
 - `GET /<int:pk>/`: View details of a specific task.
 - `GET /<int:pk>/update/`: Update a specific task.
 - `GET /<int:pk>/delete/`: Delete a specific task.
+
+## Available REST API Views and Endpoints
+
 - `GET /api/tasks/`: List all tasks via the API.
 - `POST /api/tasks/`: Create a new task via the API.
 - `GET /api/tasks/{task_id}/`: Retrieve a specific task via the API.
 - `PUT /api/tasks/{task_id}/`: Update a specific task via the API.
 - `DELETE /api/tasks/{task_id}/`: Delete a specific task via the API.
+- `POST /api/login/`: Log in with an existing user account
+- `POST /api/register/`: Register a new user account.
 
 ## Contributing
 
@@ -137,5 +135,9 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 6. Create a pull request to the main repository.
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
+
+---
+
+Feel free to customize this README file further to include additional information or specific instructions for your project.
