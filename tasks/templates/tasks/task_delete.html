@@ -1,9 +1,65 @@
-{% extends '../base.html' %} {% block content %}
+{% extends '../base.html' %} 
+{% block content %}
+<style>
+  /* Delete Task Styles */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  /* Button Styles */
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .btn-container button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-container button:hover {
+    background-color: #c82333;
+  }
+
+  /* Cancel Link Styles */
+  .cancel-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .cancel-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  .cancel-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+
 <h2>Delete Task</h2>
 <p>Are you sure you want to delete the task "{{ task.title }}"?</p>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit">Confirm Deletion</button>
-</form>
-<a href="{% url 'task_details' task.id %}">Cancel</a>
+<div class="btn-container">
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Deletion</button>
+  </form>
+</div>
+<div class="cancel-link">
+  <a href="{% url 'task_details' task.id %}">Cancel</a>
+</div>
 {% endblock %}

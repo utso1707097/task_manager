@@ -81,23 +81,10 @@
       </div>
     </header>
 
-    <div class="container">
-      <div class="register-container">
-        <h2>Register</h2>
-        <form method="post" class="register-form">
-          {% csrf_token %} {{ form.username.label_tag }} {{ form.username }}
-          <br />
-          {{ form.email.label_tag }} {{ form.email }}
-          <br />
-          {{ form.password1.label_tag }} {{ form.password1 }}
-          <br />
-          <br/ > Confirm : {{ form.password2 }}
-          <br />
-          <br />
-          <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
-      </div>
+    <div class="content">
+      <h2>Logout</h2>
+      <p>You have been successfully logged out.</p>
+      <a href="{% url 'login' %}">Login Again</a>
     </div>
 
     <footer>
@@ -106,42 +93,3 @@
     </footer>
   </body>
 </html>
-
-<style>
-  body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .register-container {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-  }
-
-  .register-form {
-    margin-top: 20px;
-  }
-
-  .btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-
-  a {
-    text-decoration: none;
-  }
-</style>

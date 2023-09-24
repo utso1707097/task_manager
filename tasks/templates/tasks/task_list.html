@@ -1,5 +1,82 @@
 {% extends '../base.html' %} {% block content %}
-<h2>Task List</h2>
+
+<style>
+  /* Filter Form Styles */
+  .filter-form {
+    margin-bottom: 20px;
+  }
+
+  .filter-form input[type="text"],
+  .filter-form select {
+    margin-right: 10px;
+  }
+
+  /* Task List Styles */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  }
+
+  li a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Status Styles */
+  .completed {
+    color: green;
+  }
+
+  .incomplete {
+    color: red;
+  }
+
+  /* Create New Task Link Styles */
+  .create-task-link {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+</style>
+
+<h2 style="display: flex; justify-content: center; align-items: center">
+  Task List
+</h2>
+<form method="get" action="{% url 'task_list' %}" class="filter-form">
+  <input
+    type="text"
+    name="search"
+    placeholder="Search by Title"
+    value="{{ request.GET.search }}"
+  />
+  <select name="priority">
+    <option value="">Filter by Priority</option>
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+  <input
+    type="date"
+    name="due_date"
+    placeholder="Filter by Due Date"
+    value="{{ request.GET.due_date }}"
+  />
+  <select name="is_completed">
+    <option value="">Filter by Completion</option>
+    <option value="1">Completed</option>
+    <option value="0">Incomplete</option>
+  </select>
+  <button type="submit">Apply Filters</button>
+</form>
+
 <ul>
   {% for task in tasks %}
   <li>
@@ -8,12 +85,22 @@
     <p>Due Date: {{ task.due_date }}</p>
     <p>Priority: {{ task.priority }}</p>
     <p>
-      Status: {% if task.is_completed %}Completed{% else %}Incomplete{% endif %}
+      Status: {% if task.is_completed %}✔ Completed{% else %}✘ Incomplete {% endif %}
     </p>
   </li>
   {% empty %}
   <li>No tasks available.</li>
   {% endfor %}
 </ul>
-<a href="{% url 'task_create' %}">Create New Task</a>
+<a
+  href="{% url 'task_create' %}"
+  style="
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  "
+  >Create New Task</a
+>
 {% endblock %}

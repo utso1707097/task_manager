@@ -38,7 +38,24 @@ class TaskListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        queryset = Task.objects.filter(user=self.request.user)
+        search = self.request.GET.get('search')
+        due_date = self.request.GET.get('due_date')
+        priority = self.request.GET.get('priority')
+        is_completed = self.request.GET.get('is_completed')
+
+        if search:
+            queryset = queryset.filter(title__icontains=search)
+        if due_date:
+            queryset = queryset.filter(due_date=due_date)
+        if priority:
+            queryset = queryset.filter(priority=priority)
+        if is_completed == "1":
+            queryset = queryset.filter(is_completed=True)
+        elif is_completed == "0":
+            queryset = queryset.filter(is_completed=False)
+
+        return queryset
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task

@@ -1,16 +1,75 @@
-{% extends '../base.html' %} {% block content %}
-<h2>Task Details</h2>
-{% for photo in task.task_photos.all %}
-<img src="{{ MEDIA_URL }}{{ photo.image.url }}" alt="Task Photo" />
-{% endfor %}
+{% extends '../base.html' %} 
+{% block content %}
+<style>
+  /* Task Details Styles */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .image-container img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  .status {
+    color: {% if task.is_completed %}green{% else %}red{% endif %};
+    font-weight: bold;
+  }
+
+  /* Action Links Styles */
+  .action-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 5px;
+  }
+
+  .action-links a {
+    margin: 0 10px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .action-links a:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+</style>
+
+<h2 style="display: flex; justify-content: center; align-items: center">Task Details</h2>
+<div class="image-container">
+  {% for photo in task.task_photos.all %}
+    <img src="{{ MEDIA_URL }}{{ photo.image.url }}" alt="Task Photo" />
+  {% endfor %}
+</div>
 <p>Title: {{ task.title }}</p>
 <p>Description: {{ task.description }}</p>
 <p>Due Date: {{ task.due_date }}</p>
 <p>Priority: {{ task.priority }}</p>
-<p>
+<p class="status">
   Status: {% if task.is_completed %}Completed{% else %}Incomplete{% endif %}
 </p>
-<a href="{% url 'task_update' task.id %}">Edit Task</a>
-<a href="{% url 'task_delete' task.id %}">Delete Task</a>
-<a href="{% url 'task_list' %}">Back to Task List</a>
+<div class="action-links">
+  <a href="{% url 'task_update' task.id %}">Edit Task</a>
+  <a href="{% url 'task_delete' task.id %}">Delete Task</a>
+  <a href="{% url 'task_list' %}">Back to Task List</a>
+</div>
 {% endblock %}
