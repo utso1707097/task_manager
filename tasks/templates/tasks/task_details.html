@@ -1,5 +1,8 @@
 {% extends '../base.html' %} {% block content %}
 <h2>Task Details</h2>
+{% for photo in task.task_photos.all %}
+<img src="{{ MEDIA_URL }}{{ photo.image.url }}" alt="Task Photo" />
+{% endfor %}
 <p>Title: {{ task.title }}</p>
 <p>Description: {{ task.description }}</p>
 <p>Due Date: {{ task.due_date }}</p>

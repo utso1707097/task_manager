@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task
+from .models import Task , Photo
 # Register your models here.
 
 class TaskAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description', 'user__username') 
 
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Photo)

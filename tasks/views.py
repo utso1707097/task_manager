@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
-from .models import Task
+from .models import Task, Photo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TaskForm
@@ -47,6 +47,11 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('task_list')
     def form_valid(self, form):
         form.instance.user = self.request.user
+        photos = self.request.FILES.getlist('photos')
+        if form.is_valid() and photos:
+            task = form.save()
+            for photo in photos:
+                Photo.objects.create(task=task, image=photo)
         return super().form_valid(form)
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -56,6 +61,12 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('task_list')
     def form_valid(self, form):
         form.instance.user = self.request.user
+        photos = self.request.FILES.getlist('photos')
+        if form.is_valid():
+            task = form.save()
+            Photo.objects.filter(task=task).delete() 
+            for photo in photos:
+                Photo.objects.create(task=task, image=photo)
         return super().form_valid(form)
     def get_object(self, queryset=None):
         task = super().get_object(queryset)
