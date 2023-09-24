@@ -1,5 +1,3 @@
-Certainly! Here's the updated README.md file with all the specified paths and endpoints included:
-
 ---
 
 # Task Manager Application
